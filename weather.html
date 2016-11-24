@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <div class="input-group">
+                <input type="text" class="form-control" value="无锡">
+                <span class="input-group-btn">
+                    <button class="btn btn-primary">查询</button>
+                </span>
+            </div>
+            <form class="form-horizontal" style="margin-top: 20px">
+                <div class="form-group form-group-sm">
+                    <label class="col-sm-2 control-label">城市</label>
+                    <div class="col-sm-5">
+                        <!--<input class="form-control" type="text" id=city">-->
+                        <div id="city"></div>
+                    </div>
+                </div>
+                <div class="form-group form-group-sm">
+                    <label class="col-sm-2 control-label">气温</label>
+                    <div class="col-sm-5">
+                        <!--<input class="form-control" type="text" id="temp">-->
+                        <div id="temp"></div>
+                    </div>
+                </div>
+                <div class="form-group form-group-sm">
+                    <label class="col-sm-2 control-label">天气</label>
+                    <div class="col-sm-5">
+                        <!--<input class="form-control" type="text" id="weather">-->
+                        <div id="weather"></div>
+                    </div>
+                </div>
+            </form>
+            <!--<div>-->
+                <!--<div id="city"></div>-->
+                <!--<div id="temp"></div>-->
+                <!--<div id="weather"></div>-->
+            <!--</div>-->
+        </div>
+    </div>
+</div>
+<script>
+    function request(){
+        $.ajax({
+            method:'GET',
+            url:'http://apis.baidu.com/apistore/weatherservice/cityname',
+            data:'cityname='+$('.form-control').val(),
+            dataType:'json',
+            headers:{
+                "apikey":"ad1e2ad96608fdcb73b404207bb9ebff"
+            },
+            success:function(data){
+                var retData=data.retData;
+                var city = retData.city;
+                var temp =retData.temp;
+                var weather =retData.weather;
+                $("#city").html(city);
+                $("#temp").html(temp);
+                $("#weather").html(weather);
+            }
+        })
+    }
+    $(".btn").click(function(){
+        request();
+    });
+    request();
+</script>
+</body>
+</html>

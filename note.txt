@@ -1,0 +1,50 @@
+
+Promise是一个构造函数，拥有
+ 自身 race,all,reject,resolve
+ 原型 then catch
+
+ Promise 构造函数接收一个函数参数
+   函数有两个参数
+     resolve 异步执行成功后的回调函数(将Promise状态置为fullfilled)
+     reject  异步执行失败的回调函数(将Promise状态置为rejected)
+ 注意：Promise 创建对象时会将传进去的函数执行
+
+ then 接收一个函数参数
+   会获取resolve中传入的参数
+   在异步任务执行完成之后执行
+
+ 把原来的回调写法分离出来，在异步操作执行完后，用链式调用的方式执行回调函数。
+ 这么写的好处？
+ 当有多层回调的处理方式？
+
+ Promise除了简化层层回调的写法，Promise可用通过维护状态、传递状态的方式
+ 使的回调函数能够及时调用
+
+ catch除了指定reject的回調，还可以捕获异常(错误)。
+
+ all可以并行执行异步操作的功能，并且在所有异步执行完后才执行回调。
+    在一个回调中可以处理所有的返回数据
+    可以用来做图片加载
+
+ all回调以最后一个为基准(一定等到最后一个异步操作执行结束)
+ race回调以第一个为基准，可以给某个操作设置超时时间，如资源加载
+
+ Promise/A+规范
+ http://www.ituring.com.cn/article/66566
+
+ Jquery 使用$.Deferred实现了Promise规范
+  resolve
+  reject
+  then
+  done
+  fail
+  always
+  $.when 类似于all
+
+  ajax返回一个受限的Deferred对象
+  success
+  error
+  complete
+
+ 作业:熟悉Promise/A+规范
+     实现一个驾校考试系统
